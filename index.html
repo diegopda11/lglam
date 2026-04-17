@@ -44,6 +44,7 @@
     /* ── Tipografía global ── */
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 64px;
       font-size: 16px;
     }
 
@@ -89,7 +90,9 @@
 
     .nav-logo img {
       display: block;
-      filter: grayscale(100%);
+      height: 52px;
+      width: auto;
+      object-fit: contain;
     }
 
     .nav-links {
@@ -351,10 +354,11 @@
     }
 
     .card {
-      cursor: pointer;
       border: 1px solid #E0E0E0;
       overflow: hidden;
       transition: box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
     }
 
     .card:hover {
@@ -371,6 +375,9 @@
 
     .card-body {
       padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     .card-body h3 {
@@ -384,6 +391,158 @@
       font-size: 0.85rem;
       font-weight: 600;
       letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: auto;
+    }
+
+    .btn-book {
+      flex: 1;
+      background: var(--color-black);
+      color: var(--color-white);
+      border: 2px solid var(--color-black);
+      padding: 0.55rem 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-book:hover {
+      opacity: 0.8;
+    }
+
+    .btn-gallery {
+      flex: 1;
+      background: transparent;
+      color: var(--color-black);
+      border: 2px solid var(--color-black);
+      padding: 0.55rem 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-gallery:hover {
+      background: var(--color-black);
+      color: var(--color-white);
+    }
+
+    /* ── Modal Galería ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-container {
+      background: var(--color-white);
+      width: 100%;
+      max-width: 860px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      transform: translateY(12px) scale(0.98);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.is-open .modal-container {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-title {
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+      color: var(--color-black);
+      line-height: 1;
+      padding: 0.25rem;
+      transition: opacity 0.2s;
+    }
+
+    .modal-close:hover {
+      opacity: 0.5;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .modal-grid img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
+      transition: filter 0.2s;
+    }
+
+    .modal-grid img:hover {
+      filter: grayscale(0%);
+    }
+
+    .modal-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+      padding: 2rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .modal-container {
+        padding: 1.25rem;
+      }
+
+      .modal-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card-actions {
+        flex-direction: column;
+      }
     }
 
     /* ── Fade-in animation ── */
@@ -591,24 +750,17 @@
       padding: 3rem;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
     }
 
     .footer-info img {
-      height: 50px;
-      width: auto;
-    }
-
-    .footer-info address {
-      font-style: normal;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      font-size: 0.78rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      opacity: 0.85;
-      line-height: 1.6;
+      width: 100%;
+      max-width: 450px;
+      height: auto;
+      object-fit: contain;
+      display: block;
     }
 
     .footer-social {
@@ -698,7 +850,7 @@
   <!-- ── Navbar ── -->
   <nav id="navbar">
     <a class="nav-logo" href="#hero">
-      <img src="logo.jpeg" alt="lg.glam_ logo" height="40" class="grayscale">
+      <img src="logo trans.png" alt="Leyva Guzmán Beauty Salon logo" height="52">
     </a>
 
     <ul class="nav-links">
@@ -761,86 +913,135 @@
     <div class="cards-grid">
 
       <!-- MAQUILLAJE — Maquillaje Social -->
-      <div class="card"
-           data-category="maquillaje"
-           data-message="Hola, me interesa el servicio de Maquillaje Social"
-           data-analytics="whatsapp-click-maquillaje-social">
+      <div class="card" data-category="maquillaje">
         <img src="maquillaje.jpeg" alt="Servicio de maquillaje social en lg.glam_">
         <div class="card-body">
           <h3>MAQUILLAJE SOCIAL</h3>
           <p>$80.000</p>
+          <div class="card-actions">
+            <button class="btn-book"
+                    data-message="Hola, me interesa el servicio de Maquillaje Social"
+                    data-analytics="whatsapp-click-maquillaje-social">
+              AGENDAR CITA
+            </button>
+            <button class="btn-gallery" data-service="maquillaje" data-service-label="MAQUILLAJE SOCIAL">
+              VER MÁS
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- MAQUILLAJE — Maquillaje de Novia -->
-      <div class="card"
-           data-category="maquillaje"
-           data-message="Hola, me interesa el servicio de Maquillaje de Novia"
-           data-analytics="whatsapp-click-maquillaje-novia">
+      <div class="card" data-category="maquillaje">
         <img src="maquillaje.jpeg" alt="Servicio de maquillaje de novia en lg.glam_">
         <div class="card-body">
           <h3>MAQUILLAJE DE NOVIA</h3>
           <p>$150.000</p>
+          <div class="card-actions">
+            <button class="btn-book"
+                    data-message="Hola, me interesa el servicio de Maquillaje de Novia"
+                    data-analytics="whatsapp-click-maquillaje-novia">
+              AGENDAR CITA
+            </button>
+            <button class="btn-gallery" data-service="maquillaje" data-service-label="MAQUILLAJE DE NOVIA">
+              VER MÁS
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- CABELLO — Tinte de Cabello -->
-      <div class="card"
-           data-category="cabello"
-           data-message="Hola, me interesa el servicio de Tinte de Cabello"
-           data-analytics="whatsapp-click-tinte-cabello">
+      <div class="card" data-category="cabello">
         <img src="tinte.jpeg" alt="Servicio de tinte de cabello en lg.glam_">
         <div class="card-body">
           <h3>TINTE DE CABELLO</h3>
           <p>$90.000</p>
+          <div class="card-actions">
+            <button class="btn-book"
+                    data-message="Hola, me interesa el servicio de Tinte de Cabello"
+                    data-analytics="whatsapp-click-tinte-cabello">
+              AGENDAR CITA
+            </button>
+            <button class="btn-gallery" data-service="cabello" data-service-label="TINTE DE CABELLO">
+              VER MÁS
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- CABELLO — Peinado Especial -->
-      <div class="card"
-           data-category="cabello"
-           data-message="Hola, me interesa el servicio de Peinado Especial"
-           data-analytics="whatsapp-click-peinado-especial">
+      <div class="card" data-category="cabello">
         <img src="peinado.jpeg" alt="Servicio de peinado especial en lg.glam_">
         <div class="card-body">
           <h3>PEINADO ESPECIAL</h3>
           <p>$70.000</p>
+          <div class="card-actions">
+            <button class="btn-book"
+                    data-message="Hola, me interesa el servicio de Peinado Especial"
+                    data-analytics="whatsapp-click-peinado-especial">
+              AGENDAR CITA
+            </button>
+            <button class="btn-gallery" data-service="cabello" data-service-label="PEINADO ESPECIAL">
+              VER MÁS
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- FACIALES — Diseño de Cejas -->
-      <div class="card"
-           data-category="faciales"
-           data-message="Hola, me interesa el servicio de Diseño de Cejas"
-           data-analytics="whatsapp-click-diseno-cejas">
+      <div class="card" data-category="faciales">
         <img src="cejas.jpeg" alt="Servicio de diseño de cejas en lg.glam_">
         <div class="card-body">
           <h3>DISEÑO DE CEJAS</h3>
           <p>$35.000</p>
+          <div class="card-actions">
+            <button class="btn-book"
+                    data-message="Hola, me interesa el servicio de Diseño de Cejas"
+                    data-analytics="whatsapp-click-diseno-cejas">
+              AGENDAR CITA
+            </button>
+            <button class="btn-gallery" data-service="faciales" data-service-label="DISEÑO DE CEJAS">
+              VER MÁS
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- FACIALES — Extensión de Pestañas -->
-      <div class="card"
-           data-category="faciales"
-           data-message="Hola, me interesa el servicio de Extensión de Pestañas"
-           data-analytics="whatsapp-click-extension-pestanas">
+      <div class="card" data-category="faciales">
         <img src="pestañas.jpeg" alt="Servicio de extensión de pestañas en lg.glam_">
         <div class="card-body">
           <h3>EXTENSIÓN DE PESTAÑAS</h3>
           <p>$120.000</p>
+          <div class="card-actions">
+            <button class="btn-book"
+                    data-message="Hola, me interesa el servicio de Extensión de Pestañas"
+                    data-analytics="whatsapp-click-extension-pestanas">
+              AGENDAR CITA
+            </button>
+            <button class="btn-gallery" data-service="faciales" data-service-label="EXTENSIÓN DE PESTAÑAS">
+              VER MÁS
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- MANOS Y PIES — Tratamiento de Pedicura -->
-      <div class="card"
-           data-category="manos-pies"
-           data-message="Hola, me interesa el servicio de Tratamiento de Pedicura"
-           data-analytics="whatsapp-click-pedicura">
+      <div class="card" data-category="manos-pies">
         <img src="tratamiento-de-pedicura.png" alt="Servicio de tratamiento de pedicura en lg.glam_">
         <div class="card-body">
           <h3>TRATAMIENTO DE PEDICURA</h3>
           <p>$55.000</p>
+          <div class="card-actions">
+            <button class="btn-book"
+                    data-message="Hola, me interesa el servicio de Tratamiento de Pedicura"
+                    data-analytics="whatsapp-click-pedicura">
+              AGENDAR CITA
+            </button>
+            <button class="btn-gallery" data-service="manos-pies" data-service-label="TRATAMIENTO DE PEDICURA">
+              VER MÁS
+            </button>
+          </div>
         </div>
       </div>
 
@@ -917,26 +1118,31 @@
         <img src="tinte.jpeg" alt="Tinte de cabello en lg.glam_">
       </div>
     </div>
-    <a href="https://www.instagram.com/lg.glam_/" target="_blank" rel="noopener noreferrer" class="btn-dark ig-follow">
+    <a href="https://www.instagram.com/lg.glam__/" target="_blank" rel="noopener noreferrer" class="btn-dark ig-follow">
       SEGUIR EN INSTAGRAM
     </a>
   </section>
 
+  <!-- ── Modal Galería ── -->
+  <div id="gallery-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title"></h2>
+        <button class="modal-close" aria-label="Cerrar galería">&#10005;</button>
+      </div>
+      <div class="modal-grid" id="modal-grid"></div>
+    </div>
+  </div>
+
   <!-- ── Footer ── -->
   <footer id="footer" class="dark-bg">
 
-    <!-- Columna izquierda: info de contacto -->
+    <!-- Columna izquierda: logo y redes -->
     <div class="footer-info">
-      <img src="logo.jpeg" alt="lg.glam_ logo" class="grayscale">
-
-      <address>
-        <span>Calle 123 #45-67, Bogotá, Colombia</span>
-        <span>+57 300 000 0000</span>
-        <span>contacto@lgglam.com</span>
-      </address>
+      <img src="logo trans.png" alt="Leyva Guzmán Beauty Salon logo">
 
       <div class="footer-social">
-        <a href="https://www.instagram.com/lg.glam_/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/lg.glam__/" target="_blank" rel="noopener noreferrer">
           INSTAGRAM
         </a>
         <a href="https://wa.me/6682446325" target="_blank" rel="noopener noreferrer">
@@ -978,9 +1184,37 @@
     const CONFIG = {
       whatsappNumber: "6682446325",
       defaultMessage: "Hola, me gustaría agendar una cita en lg.glam_",
-      instagramUrl: "https://www.instagram.com/lg.glam_/",
+      instagramUrl: "https://www.instagram.com/lg.glam__/",
       googleMapsUrl: "https://www.google.com/maps/place/El+aguajito+higuera+de+Zaragoza/@25.958903,-109.3311769,17z/data=!3m1!4b1!4m6!3m5!1s0x86b9f1004fdb58a1:0xf9492dc018a94972!8m2!3d25.958903!4d-109.328602!16s%2Fg%2F11wv3xnh9b?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D",
       ga4MeasurementId: "G-XXXXXXXXXX"
+    };
+
+    // ── Datos de galería por categoría ──
+    const GALLERY_DATA = {
+      maquillaje: [
+        { src: 'maquillaje.jpeg', alt: 'Maquillaje social lg.glam_' },
+        { src: 'maquillaje.jpeg', alt: 'Maquillaje de novia lg.glam_' },
+        { src: 'maquillaje.jpeg', alt: 'Maquillaje artístico lg.glam_' },
+        { src: 'maquillaje.jpeg', alt: 'Maquillaje de gala lg.glam_' }
+      ],
+      cabello: [
+        { src: 'tinte.jpeg',   alt: 'Tinte de cabello lg.glam_' },
+        { src: 'peinado.jpeg', alt: 'Peinado especial lg.glam_' },
+        { src: 'tinte.jpeg',   alt: 'Coloración lg.glam_' },
+        { src: 'peinado.jpeg', alt: 'Recogido elegante lg.glam_' }
+      ],
+      faciales: [
+        { src: 'cejas.jpeg',    alt: 'Diseño de cejas lg.glam_' },
+        { src: 'pestañas.jpeg', alt: 'Extensión de pestañas lg.glam_' },
+        { src: 'cejas.jpeg',    alt: 'Microblading lg.glam_' },
+        { src: 'pestañas.jpeg', alt: 'Lifting de pestañas lg.glam_' }
+      ],
+      'manos-pies': [
+        { src: 'tratamiento-de-pedicura.png', alt: 'Pedicura spa lg.glam_' },
+        { src: 'tratamiento-de-pedicura.png', alt: 'Manicura gel lg.glam_' },
+        { src: 'tratamiento-de-pedicura.png', alt: 'Nail art lg.glam_' },
+        { src: 'tratamiento-de-pedicura.png', alt: 'Tratamiento de uñas lg.glam_' }
+      ]
     };
 
     // ── WhatsAppService: lógica de URL pura ──
@@ -1011,6 +1245,9 @@
     class UIController {
       constructor(whatsappService) {
         this.wa = whatsappService;
+        this.modal = document.getElementById('gallery-modal');
+        this.modalGrid = document.getElementById('modal-grid');
+        this.modalTitle = document.getElementById('modal-title');
       }
 
       initTabs() {
@@ -1021,7 +1258,6 @@
           tab.addEventListener('click', () => {
             const filter = tab.dataset.filter;
 
-            // Update active tab
             tabs.forEach(t => {
               t.classList.remove('active');
               t.setAttribute('aria-selected', 'false');
@@ -1029,13 +1265,11 @@
             tab.classList.add('active');
             tab.setAttribute('aria-selected', 'true');
 
-            // Filter cards
             cards.forEach(card => {
               const category = card.dataset.category;
               if (filter === 'todos' || category === filter) {
                 card.style.display = '';
                 card.classList.remove('fade-in');
-                // Force reflow to restart animation
                 void card.offsetWidth;
                 card.classList.add('fade-in');
               } else {
@@ -1048,7 +1282,6 @@
       }
 
       initWhatsAppButtons() {
-        // Select all elements with data-message attribute (buttons and cards)
         const whatsappTriggers = document.querySelectorAll('[data-message]');
 
         whatsappTriggers.forEach(el => {
@@ -1057,7 +1290,6 @@
             const url = this.wa.buildUrl(message);
             if (!url) return;
 
-            // Fire analytics before opening
             const analyticsId = el.dataset.analytics;
             if (analyticsId && typeof gtag === 'function') {
               gtag('event', 'whatsapp_click', { button_id: analyticsId });
@@ -1068,9 +1300,112 @@
         });
       }
 
+      openGallery(serviceKey, serviceLabel) {
+        const images = GALLERY_DATA[serviceKey] || [];
+
+        // Populate title
+        this.modalTitle.textContent = serviceLabel || serviceKey.toUpperCase();
+
+        // Populate grid
+        this.modalGrid.innerHTML = '';
+        if (images.length === 0) {
+          this.modalGrid.innerHTML = '<p class="modal-empty">PRÓXIMAMENTE</p>';
+        } else {
+          images.forEach(({ src, alt }) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = alt;
+            img.loading = 'lazy';
+            this.modalGrid.appendChild(img);
+          });
+        }
+
+        // Open modal
+        this.modal.classList.add('is-open');
+        this.modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        // Focus trap: focus close button
+        const closeBtn = this.modal.querySelector('.modal-close');
+        if (closeBtn) closeBtn.focus();
+      }
+
+      closeGallery() {
+        this.modal.classList.remove('is-open');
+        this.modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      initGalleryModal() {
+        // "Ver más" buttons
+        document.querySelectorAll('.btn-gallery').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const serviceKey   = btn.dataset.service;
+            const serviceLabel = btn.dataset.serviceLabel;
+            this.openGallery(serviceKey, serviceLabel);
+          });
+        });
+
+        // Close button
+        const closeBtn = this.modal.querySelector('.modal-close');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => this.closeGallery());
+        }
+
+        // Click outside container
+        this.modal.addEventListener('click', (e) => {
+          if (e.target === this.modal) this.closeGallery();
+        });
+
+        // Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.modal.classList.contains('is-open')) {
+            this.closeGallery();
+          }
+        });
+      }
+
       initAnalytics() {
-        // Analytics are handled inline in initWhatsAppButtons
-        // This method is a no-op but kept for architectural clarity
+        // Analytics handled inline in initWhatsAppButtons
+      }
+
+      initSmoothScroll() {
+        const easeInOutCubic = t =>
+          t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+        const smoothScrollTo = (targetY, duration = 700) => {
+          const startY = window.scrollY;
+          const distance = targetY - startY;
+          let startTime = null;
+
+          const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = easeInOutCubic(progress);
+
+            window.scrollTo(0, startY + distance * ease);
+
+            if (progress < 1) requestAnimationFrame(step);
+          };
+
+          requestAnimationFrame(step);
+        };
+
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+          link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href').slice(1);
+            const target = document.getElementById(targetId);
+            if (!target) return;
+
+            e.preventDefault();
+
+            const navbarHeight = 64;
+            const targetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+
+            smoothScrollTo(targetTop, 700);
+          });
+        });
       }
 
       initHamburger() {
@@ -1083,7 +1418,6 @@
           navMobile.classList.toggle('visible');
         });
 
-        // Close menu when any link or button in nav-mobile is clicked
         const mobileLinks = navMobile.querySelectorAll('a, button');
         mobileLinks.forEach(link => {
           link.addEventListener('click', () => {
@@ -1095,8 +1429,10 @@
       init() {
         this.initTabs();
         this.initWhatsAppButtons();
+        this.initGalleryModal();
         this.initAnalytics();
         this.initHamburger();
+        this.initSmoothScroll();
       }
     }
 
