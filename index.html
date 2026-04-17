@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="lg.glam_ — Estudio de Belleza">
+  <meta property="og:description" content="¡Los mejores cambios de look! Maquillaje, cabello, uñas y más. Agenda tu cita hoy.">
+  <meta property="og:image" content="maquillaje.jpeg">
+
+  <!-- Critical Rendering Path: preload Hero image -->
+  <link rel="preload" as="image" href="maquillaje.jpeg">
+
+  <!-- Google Fonts: Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <title>lg.glam_ — Estudio de Belleza</title>
+
+  <style>
+    /* ── Reset CSS ── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── Variables de paleta ── */
+    :root {
+      --color-black:      #000000;
+      --color-white:      #FFFFFF;
+      --color-gray-light: #F5F5F5;
+    }
+
+    /* ── Tipografía global ── */
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background-color: var(--color-white);
+      color: var(--color-black);
+      overflow-x: hidden;
+    }
+
+    /* ── Imágenes desaturadas ── */
+    .grayscale {
+      filter: grayscale(100%);
+    }
+
+    /* ── Accesibilidad de teclado ── */
+    :focus-visible {
+      outline: 2px solid var(--color-black);
+      outline-offset: 2px;
+    }
+
+    .dark-bg :focus-visible {
+      outline-color: var(--color-white);
+    }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--color-white);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+    }
+
+    .nav-logo img {
+      display: block;
+      filter: grayscale(100%);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-black);
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.6;
+    }
+
+    .btn-dark {
+      background: var(--color-black);
+      color: var(--color-white);
+      border: none;
+      padding: 0.6rem 1.25rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-dark:hover {
+      opacity: 0.8;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-black);
+      line-height: 1;
+    }
+
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--color-white);
+      padding: 1.5rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.10);
+      z-index: 999;
+    }
+
+    .nav-mobile.visible {
+      display: flex;
+    }
+
+    .nav-mobile a {
+      text-decoration: none;
+      color: var(--color-black);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Responsive Navbar ── */
+    @media (max-width: 768px) {
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+
+    /* ── Hero ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      background-image: url(maquillaje.jpeg);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 64px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.50);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      max-width: 800px;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--color-white);
+      line-height: 1.1;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-subtitle {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--color-white);
+      letter-spacing: 0.12em;
+      opacity: 0.85;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .btn-outline-white {
+      border: 2px solid var(--color-white);
+      background: transparent;
+      color: var(--color-white);
+      padding: 0.7rem 1.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-outline-white:hover {
+      background: var(--color-white);
+      color: var(--color-black);
+    }
+
+    .btn-solid-white {
+      background: var(--color-white);
+      color: var(--color-black);
+      border: 2px solid var(--color-white);
+      padding: 0.7rem 1.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-solid-white:hover {
+      opacity: 0.85;
+    }
+
+    /* ── Responsive Hero ── */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .btn-outline-white,
+      .btn-solid-white {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+      }
+    }
+
+    /* ── Servicios ── */
+    #servicios {
+      padding: 4rem 2rem;
+      background: var(--color-white);
+    }
+
+    #servicios h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin-bottom: 2rem;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .tab {
+      background: transparent;
+      color: var(--color-black);
+      border: 2px solid var(--color-black);
+      padding: 0.5rem 1.1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .tab:hover {
+      background: var(--color-black);
+      color: var(--color-white);
+    }
+
+    .tab.active {
+      background: var(--color-black);
+      color: var(--color-white);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      cursor: pointer;
+      border: 1px solid #E0E0E0;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      filter: none;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-body h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-body p {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Fade-in animation ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease both;
+    }
+
+    /* ── Responsive Servicios ── */
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tabs {
+        gap: 0.4rem;
+      }
+    }
+
+    /* ── Premium ── */
+    #premium {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .premium-img {
+      object-fit: cover;
+      min-height: 500px;
+      width: 100%;
+      display: block;
+    }
+
+    .premium-content {
+      background: #F5F5F5;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .premium-content h2 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin-bottom: 2rem;
+    }
+
+    .premium-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .premium-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid #E0E0E0;
+      padding-bottom: 0.75rem;
+    }
+
+    .premium-list li:last-child {
+      border-bottom: none;
+    }
+
+    .premium-price {
+      font-weight: 700;
+    }
+
+    /* ── Responsive Premium ── */
+    @media (max-width: 768px) {
+      #premium {
+        grid-template-columns: 1fr;
+      }
+
+      .premium-img {
+        min-height: 300px;
+      }
+
+      .premium-content {
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    /* ── CTA Franja ── */
+    #cta {
+      background: var(--color-black);
+      color: var(--color-white);
+      text-align: center;
+      padding: 4rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    #cta h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      line-height: 1.2;
+    }
+
+    #cta p {
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+      max-width: 480px;
+    }
+
+    /* ── Responsive CTA ── */
+    @media (max-width: 768px) {
+      #cta h2 {
+        font-size: 1.4rem;
+      }
+
+      #cta p {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* ── Feed Instagram ── */
+    #instagram {
+      padding: 4rem 2rem;
+      background: var(--color-white);
+      text-align: center;
+    }
+
+    #instagram h2 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin-bottom: 2rem;
+    }
+
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+    }
+
+    .ig-item {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ig-item img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      display: block;
+      filter: none;
+    }
+
+    .ig-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='2' width='20' height='20' rx='5' ry='5'/%3E%3Cpath d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'/%3E%3Cline x1='17.5' y1='6.5' x2='17.51' y2='6.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .ig-item:hover::after {
+      opacity: 1;
+    }
+
+    .ig-follow {
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 0.5rem;
+    }
+
+    /* ── Responsive Instagram ── */
+    @media (max-width: 768px) {
+      .ig-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ── Footer ── */
+    #footer {
+      background: var(--color-black);
+      color: var(--color-white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-info {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .footer-info img {
+      height: 50px;
+      width: auto;
+    }
+
+    .footer-info address {
+      font-style: normal;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-social a {
+      color: var(--color-white);
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 0.4rem 0.9rem;
+      transition: border-color 0.2s, opacity 0.2s;
+    }
+
+    .footer-social a:hover {
+      border-color: var(--color-white);
+      opacity: 0.8;
+    }
+
+    .footer-map {
+      position: relative;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-map iframe {
+      width: 100%;
+      flex: 1;
+      border: 0;
+      filter: grayscale(100%);
+      pointer-events: none;
+      display: block;
+    }
+
+    .footer-map-btn {
+      display: block;
+      text-align: center;
+      background: var(--color-white);
+      color: var(--color-black);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      padding: 0.85rem 1.5rem;
+      transition: opacity 0.2s;
+    }
+
+    .footer-map-btn:hover {
+      opacity: 0.85;
+    }
+
+    .footer-bottom {
+      grid-column: 1 / -1;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      text-align: center;
+      padding: 1.25rem 2rem;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+    }
+
+    /* ── Responsive Footer ── */
+    @media (max-width: 768px) {
+      #footer {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-info {
+        padding: 2rem 1.5rem;
+      }
+
+      .footer-map {
+        min-height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#hero">
+      <img src="logo.jpeg" alt="lg.glam_ logo" height="40" class="grayscale">
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#hero">INICIO</a></li>
+      <li><a href="#servicios">SERVICIOS</a></li>
+      <li><a href="#instagram">INSTAGRAM</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <button class="btn-dark"
+              data-message="Hola, me gustaría agendar una cita en lg.glam_"
+              data-analytics="whatsapp-click-navbar">
+        AGENDAR CITA
+      </button>
+    </div>
+
+    <button class="hamburger" aria-label="Abrir menú">&#9776;</button>
+  </nav>
+
+  <!-- Menú móvil -->
+  <div class="nav-mobile">
+    <a href="#hero">INICIO</a>
+    <a href="#servicios">SERVICIOS</a>
+    <a href="#instagram">INSTAGRAM</a>
+    <button class="btn-dark"
+            data-message="Hola, me gustaría agendar una cita en lg.glam_"
+            data-analytics="whatsapp-click-navbar-mobile">
+      AGENDAR CITA
+    </button>
+  </div>
+
+  <!-- ── Hero ── -->
+  <section id="hero" class="dark-bg">
+    <div class="hero-content">
+      <h1>¡LOS MEJORES CAMBIOS DE LOOK!</h1>
+      <p class="hero-subtitle">Maquillaje · Cabello · Uñas · Faciales — Agenda tu cita hoy</p>
+      <div class="hero-buttons">
+        <a href="#servicios" class="btn-outline-white">VER SERVICIOS</a>
+        <button class="btn-solid-white"
+                data-message="Hola, me gustaría agendar una cita en lg.glam_"
+                data-analytics="whatsapp-click-hero">
+          AGENDAR CITA
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Servicios ── -->
+  <section id="servicios">
+    <h2>NUESTROS SERVICIOS</h2>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-filter="todos" role="tab" aria-selected="true">TODOS</button>
+      <button class="tab" data-filter="maquillaje" role="tab" aria-selected="false">MAQUILLAJE</button>
+      <button class="tab" data-filter="manos-pies" role="tab" aria-selected="false">MANOS Y PIES</button>
+      <button class="tab" data-filter="cabello" role="tab" aria-selected="false">CABELLO</button>
+      <button class="tab" data-filter="faciales" role="tab" aria-selected="false">FACIALES</button>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- MAQUILLAJE — Maquillaje Social -->
+      <div class="card"
+           data-category="maquillaje"
+           data-message="Hola, me interesa el servicio de Maquillaje Social"
+           data-analytics="whatsapp-click-maquillaje-social">
+        <img src="maquillaje.jpeg" alt="Servicio de maquillaje social en lg.glam_">
+        <div class="card-body">
+          <h3>MAQUILLAJE SOCIAL</h3>
+          <p>$80.000</p>
+        </div>
+      </div>
+
+      <!-- MAQUILLAJE — Maquillaje de Novia -->
+      <div class="card"
+           data-category="maquillaje"
+           data-message="Hola, me interesa el servicio de Maquillaje de Novia"
+           data-analytics="whatsapp-click-maquillaje-novia">
+        <img src="maquillaje.jpeg" alt="Servicio de maquillaje de novia en lg.glam_">
+        <div class="card-body">
+          <h3>MAQUILLAJE DE NOVIA</h3>
+          <p>$150.000</p>
+        </div>
+      </div>
+
+      <!-- CABELLO — Tinte de Cabello -->
+      <div class="card"
+           data-category="cabello"
+           data-message="Hola, me interesa el servicio de Tinte de Cabello"
+           data-analytics="whatsapp-click-tinte-cabello">
+        <img src="tinte.jpeg" alt="Servicio de tinte de cabello en lg.glam_">
+        <div class="card-body">
+          <h3>TINTE DE CABELLO</h3>
+          <p>$90.000</p>
+        </div>
+      </div>
+
+      <!-- CABELLO — Peinado Especial -->
+      <div class="card"
+           data-category="cabello"
+           data-message="Hola, me interesa el servicio de Peinado Especial"
+           data-analytics="whatsapp-click-peinado-especial">
+        <img src="peinado.jpeg" alt="Servicio de peinado especial en lg.glam_">
+        <div class="card-body">
+          <h3>PEINADO ESPECIAL</h3>
+          <p>$70.000</p>
+        </div>
+      </div>
+
+      <!-- FACIALES — Diseño de Cejas -->
+      <div class="card"
+           data-category="faciales"
+           data-message="Hola, me interesa el servicio de Diseño de Cejas"
+           data-analytics="whatsapp-click-diseno-cejas">
+        <img src="cejas.jpeg" alt="Servicio de diseño de cejas en lg.glam_">
+        <div class="card-body">
+          <h3>DISEÑO DE CEJAS</h3>
+          <p>$35.000</p>
+        </div>
+      </div>
+
+      <!-- FACIALES — Extensión de Pestañas -->
+      <div class="card"
+           data-category="faciales"
+           data-message="Hola, me interesa el servicio de Extensión de Pestañas"
+           data-analytics="whatsapp-click-extension-pestanas">
+        <img src="pestañas.jpeg" alt="Servicio de extensión de pestañas en lg.glam_">
+        <div class="card-body">
+          <h3>EXTENSIÓN DE PESTAÑAS</h3>
+          <p>$120.000</p>
+        </div>
+      </div>
+
+      <!-- MANOS Y PIES — Tratamiento de Pedicura -->
+      <div class="card"
+           data-category="manos-pies"
+           data-message="Hola, me interesa el servicio de Tratamiento de Pedicura"
+           data-analytics="whatsapp-click-pedicura">
+        <img src="tratamiento-de-pedicura.png" alt="Servicio de tratamiento de pedicura en lg.glam_">
+        <div class="card-body">
+          <h3>TRATAMIENTO DE PEDICURA</h3>
+          <p>$55.000</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Premium ── -->
+  <section id="premium">
+    <img src="peinado.jpeg" class="premium-img" alt="Peinado especial en lg.glam_">
+
+    <div class="premium-content">
+      <h2>SERVICIOS PREMIUM</h2>
+
+      <ul class="premium-list">
+        <li>
+          <span>MAQUILLAJE DE NOVIA</span>
+          <span class="premium-price">$150.000</span>
+        </li>
+        <li>
+          <span>EXTENSIÓN DE PESTAÑAS</span>
+          <span class="premium-price">$120.000</span>
+        </li>
+        <li>
+          <span>TINTE DE CABELLO</span>
+          <span class="premium-price">$90.000</span>
+        </li>
+        <li>
+          <span>MAQUILLAJE SOCIAL</span>
+          <span class="premium-price">$80.000</span>
+        </li>
+        <li>
+          <span>PEINADO ESPECIAL</span>
+          <span class="premium-price">$70.000</span>
+        </li>
+        <li>
+          <span>TRATAMIENTO DE PEDICURA</span>
+          <span class="premium-price">$55.000</span>
+        </li>
+      </ul>
+
+      <button class="btn-dark"
+              data-message="Hola, me interesa conocer los servicios premium de lg.glam_"
+              data-analytics="whatsapp-click-premium">
+        AGENDAR CITA
+      </button>
+    </div>
+  </section>
+
+  <!-- ── CTA Franja ── -->
+  <section id="cta" class="dark-bg">
+    <h2>CITA DE VALORACIÓN GRATUITA</h2>
+    <p>Descubre qué servicio es ideal para ti. Sin compromiso, sin costo.</p>
+    <button class="btn-outline-white"
+            data-message="Hola, me gustaría agendar una cita de valoración gratuita en lg.glam_"
+            data-analytics="whatsapp-click-cta">
+      AGENDAR AHORA
+    </button>
+  </section>
+
+  <!-- ── Feed Instagram ── -->
+  <section id="instagram">
+    <h2>SÍGUENOS EN INSTAGRAM</h2>
+    <div class="ig-grid">
+      <div class="ig-item">
+        <img src="cejas.jpeg" alt="Diseño de cejas en lg.glam_">
+      </div>
+      <div class="ig-item">
+        <img src="pestañas.jpeg" alt="Extensión de pestañas en lg.glam_">
+      </div>
+      <div class="ig-item">
+        <img src="peinado.jpeg" alt="Peinado especial en lg.glam_">
+      </div>
+      <div class="ig-item">
+        <img src="tinte.jpeg" alt="Tinte de cabello en lg.glam_">
+      </div>
+    </div>
+    <a href="https://www.instagram.com/lg.glam_/" target="_blank" rel="noopener noreferrer" class="btn-dark ig-follow">
+      SEGUIR EN INSTAGRAM
+    </a>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer id="footer" class="dark-bg">
+
+    <!-- Columna izquierda: info de contacto -->
+    <div class="footer-info">
+      <img src="logo.jpeg" alt="lg.glam_ logo" class="grayscale">
+
+      <address>
+        <span>Calle 123 #45-67, Bogotá, Colombia</span>
+        <span>+57 300 000 0000</span>
+        <span>contacto@lgglam.com</span>
+      </address>
+
+      <div class="footer-social">
+        <a href="https://www.instagram.com/lg.glam_/" target="_blank" rel="noopener noreferrer">
+          INSTAGRAM
+        </a>
+        <a href="https://wa.me/6682446325" target="_blank" rel="noopener noreferrer">
+          WHATSAPP
+        </a>
+      </div>
+    </div>
+
+    <!-- Columna derecha: mapa -->
+    <div class="footer-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3748.5!2d-109.3311769!3d25.958903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86b9f1004fdb58a1%3A0xf9492dc018a94972!2sEl+aguajito+higuera+de+Zaragoza!5e0!3m2!1ses!2smx!4v1"
+        width="100%"
+        height="100%"
+        style="border:0; filter: grayscale(100%); pointer-events: none;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación de lg.glam_ en Google Maps">
+        <a href="https://www.google.com/maps/place/El+aguajito+higuera+de+Zaragoza/@25.958903,-109.3311769,17z">Ver en Google Maps</a>
+      </iframe>
+      <a href="https://www.google.com/maps/place/El+aguajito+higuera+de+Zaragoza/@25.958903,-109.3311769,17z/data=!3m1!4b1!4m6!3m5!1s0x86b9f1004fdb58a1:0xf9492dc018a94972!8m2!3d25.958903!4d-109.328602!16s%2Fg%2F11wv3xnh9b?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="footer-map-btn">
+        CÓMO LLEGAR
+      </a>
+    </div>
+
+    <!-- Franja inferior de copyright -->
+    <div class="footer-bottom">
+      © 2025 lg.glam_ — Todos los derechos reservados
+    </div>
+
+  </footer>
+
+  <script>
+    // ── Configuración global ──
+    const CONFIG = {
+      whatsappNumber: "6682446325",
+      defaultMessage: "Hola, me gustaría agendar una cita en lg.glam_",
+      instagramUrl: "https://www.instagram.com/lg.glam_/",
+      googleMapsUrl: "https://www.google.com/maps/place/El+aguajito+higuera+de+Zaragoza/@25.958903,-109.3311769,17z/data=!3m1!4b1!4m6!3m5!1s0x86b9f1004fdb58a1:0xf9492dc018a94972!8m2!3d25.958903!4d-109.328602!16s%2Fg%2F11wv3xnh9b?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D",
+      ga4MeasurementId: "G-XXXXXXXXXX"
+    };
+
+    // ── WhatsAppService: lógica de URL pura ──
+    class WhatsAppService {
+      constructor(number, defaultMessage) {
+        this.number = number;
+        this.defaultMessage = defaultMessage;
+      }
+
+      sanitize(message) {
+        return message
+          .trim()
+          .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
+      }
+
+      buildUrl(message) {
+        if (!this.number || this.number === '') {
+          console.warn('WhatsApp number not configured');
+          return null;
+        }
+        const text = (message && message.trim() !== '') ? message : this.defaultMessage;
+        const sanitizedMessage = this.sanitize(text);
+        return `https://wa.me/${this.number}?text=${encodeURIComponent(sanitizedMessage)}`;
+      }
+    }
+
+    // ── UIController: interacciones DOM ──
+    class UIController {
+      constructor(whatsappService) {
+        this.wa = whatsappService;
+      }
+
+      initTabs() {
+        const tabs = document.querySelectorAll('.tab');
+        const cards = document.querySelectorAll('.card');
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            const filter = tab.dataset.filter;
+
+            // Update active tab
+            tabs.forEach(t => {
+              t.classList.remove('active');
+              t.setAttribute('aria-selected', 'false');
+            });
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+
+            // Filter cards
+            cards.forEach(card => {
+              const category = card.dataset.category;
+              if (filter === 'todos' || category === filter) {
+                card.style.display = '';
+                card.classList.remove('fade-in');
+                // Force reflow to restart animation
+                void card.offsetWidth;
+                card.classList.add('fade-in');
+              } else {
+                card.style.display = 'none';
+                card.classList.remove('fade-in');
+              }
+            });
+          });
+        });
+      }
+
+      initWhatsAppButtons() {
+        // Select all elements with data-message attribute (buttons and cards)
+        const whatsappTriggers = document.querySelectorAll('[data-message]');
+
+        whatsappTriggers.forEach(el => {
+          el.addEventListener('click', (e) => {
+            const message = el.dataset.message || '';
+            const url = this.wa.buildUrl(message);
+            if (!url) return;
+
+            // Fire analytics before opening
+            const analyticsId = el.dataset.analytics;
+            if (analyticsId && typeof gtag === 'function') {
+              gtag('event', 'whatsapp_click', { button_id: analyticsId });
+            }
+
+            window.open(url, '_blank', 'noopener,noreferrer');
+          });
+        });
+      }
+
+      initAnalytics() {
+        // Analytics are handled inline in initWhatsAppButtons
+        // This method is a no-op but kept for architectural clarity
+      }
+
+      initHamburger() {
+        const hamburger = document.querySelector('.hamburger');
+        const navMobile = document.querySelector('.nav-mobile');
+
+        if (!hamburger || !navMobile) return;
+
+        hamburger.addEventListener('click', () => {
+          navMobile.classList.toggle('visible');
+        });
+
+        // Close menu when any link or button in nav-mobile is clicked
+        const mobileLinks = navMobile.querySelectorAll('a, button');
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            navMobile.classList.remove('visible');
+          });
+        });
+      }
+
+      init() {
+        this.initTabs();
+        this.initWhatsAppButtons();
+        this.initAnalytics();
+        this.initHamburger();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const wa = new WhatsAppService(CONFIG.whatsappNumber, CONFIG.defaultMessage);
+      const ui = new UIController(wa);
+      ui.init();
+    });
+  </script>
+</body>
+</html>
